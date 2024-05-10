@@ -1,0 +1,34 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "teams": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "position": { "type": "integer" },
+                    "name": { "type": "string" },
+                    "played": { "type": "integer" },
+                    "goalDifference": { "type": "integer" },
+                    "points": { "type": "integer" }
+                },
+                "required": ["position", "name", "played", "goalDifference", "points"]
+            }
+        },
+        "topScorers": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "rank": { "type": "integer" },
+                    "name": { "type": "string" },
+                    "team": { "type": "string" },
+                    "goals": { "type": "integer" }
+                },
+                "required": ["rank", "name", "team", "goals"]
+            }
+        }
+    },
+    "required": ["teams", "topScorers"]
+}
