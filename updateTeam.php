@@ -3,69 +3,125 @@
 require 'header.php';
 //connecting the database.
 $pdo = new PDO('mysql:host=localhost;dbname=assignment','root','');
-
-function getTeamDetails($team_id) {
-    
-      
-            $stmt = $pdo->prepare("SELECT * FROM teams WHERE teamId = :team_id");
-            $stmt->bindParam(':team_id', $team_id);
-            $stmt->execute();
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-        
-   
-
-// Function to update team details
-function updateTeamDetails($teamId, $name, $city, $manager, $totalPlayers) {
-   
-            $stmt = $pdo->prepare("UPDATE teams SET name = :name, city = :city, manager = :manager, totalPlayers = :totalPlayers WHERE teamId = :teamId");
-            $stmt->bindParam(':teamId', $teamId);
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':city', $city);
-            $stmt->bindParam(':manager', $manager);
-            $stmt->bindParam(':totalPlayers', $totalPlayers);
-            $stmt->execute();
-            return true;
-        }
-        
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $teamId = $_POST['teamId'];
-    $name = $_POST['name'];
-    $city = $_POST['city'];
-    $manager = $_POST['manager'];
-    $totalPlayers = $_POST['totalPlayers'];
-
-    // Update team details
-    if (updateTeamDetails($teamId, $name, $city, $manager, $totalPlayers)) {
-        echo "Team details updated successfully.";
-    } else {
-        echo "Error updating team details.";
-    }
+if(isset($_GET['deleteTeam_id']))
+{
+$teamId=$_GET['deleteTeam_id'];
+// query to delete data.
+$stmt = $pdo->prepare("DELETE FROM teams WHERE teamId=:teamId");
+$criteria=[
+'teamId'=>$teamId
+];
+$stmt->execute($criteria);
+header ('location:displayTeam.php');
 }
+//for edit
+if(isset($_GET['editTeam_id']))
+{
+$teamId=$_GET['editTeam_id'];
+if(isset($_POST['update'])){
+    $played = filter_var($_POST['played'], FILTER_VALIDATE_INT);
+    $won = filter_var($_POST['won'], FILTER_VALIDATE_INT);
+    $drawn = filter_var($_POST['drawn'], FILTER_VALIDATE_INT);
+    $lost = filter_var($_POST['lost'], FILTER_VALIDATE_INT);
+    $for = filter_var($_POST['for'], FILTER_VALIDATE_INT);
+    $gd = filter_var($_POST['gd'], FILTER_SANITIZE_STRING);
+    
+    if ($played === false || $won === false || $drawn === false || $lost === false || $for === false) {
+        echo "Invalid input data.";
+        exit;
+    }
+    
+    // Calculate points using a standard scoring system
+    $points = ($won * 3) + ($drawn * 1);
 
-// Get team details by ID
-$teamId = $_GET['teamId']; // Assuming team_id is passed via GET parameter
-$teamDetails = getTeamDetails($teamId);
+// query to update the data.
+$stmt = $pdo->prepare("UPDATE teams SET name=:name,city=:city,manager=:manager,played=:played,won=:won,drawn=:drawn,lost=:lost,`for`=:for,`against`=:against,gd=:gd,points=:points WHERE teamId=:teamId;");
+$criteria=[
+'name'=>$_POST['name'],
+'city'=>$_POST['city'],
+'manager'=>$_POST['manager'],
+'played'=>$_POST['played'],
+'won'=>$_POST['won'],
+'drawn'=>$_POST['drawn'],
+'lost'=>$_POST['lost'],
+'for'=>$_POST['for'],
+'against'=>$_POST['against'],
+'gd'=>$_POST['gd'],
+'points'=>$points,
+'teamId'=>$teamId
+
+];
+$stmt->execute($criteria);
+}
+header ('location:displayTeam.php');
+}
 ?>
-
-
-
-<h2>Update Team Details</h2>
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <input type="hidden" name="team_id" value="<?php echo $team_id; ?>">
-    <label for="team_name">Team Name:</label><br>
-    <input type="text" id="team_name" name="team_name" value="<?php echo $teamDetails['team_name']; ?>"><br>
-    <label for="city">City:</label><br>
-    <input type="text" id="city" name="city" value="<?php echo $teamDetails['city']; ?>"><br>
-    <label for="manager">Manager:</label><br>
-    <input type="text" id="manager" name="manager" value="<?php echo $teamDetails['manager']; ?>"><br>
-    <label for="total_players">Total Players:</label><br>
-    <input type="number" id="total_players" name="total_players" value="<?php echo $teamDetails['total_players']; ?>"><br><br>
-    <input type="submit" value="Update">
-</form>
+<main>
+	
+	<article>
+		<?php
+		$stmt=$pdo->prepare("SELECT * FROM teams WHERE teamId=".$_GET['editTeam_id']."
+			");
+		$stmt->execute();
+		$row=$stmt->fetch();
+		?>
+		<h2>updating users</h2>
+		<!-- editing users -->
+		<form method="POST" action="">
+			<table>
+				<tr>
+					<td><label>Name of the club:</label></td>
+                    <td><input type="text" name="name" placeholder="full name" value="<?php echo $row['name']?>"></td>
+				</tr>
+				<tr>
+					<td><label>City:</label></td>
+                    <td><input type="text" name="city" placeholder="enter City" value="<?php echo $row['city']?>"></td>
+				</tr>
+				<tr>
+					<td><label>Manager:</label></td>
+                    <td><input type="text" name="manager" placeholder="enter Manager name" value="<?php echo $row['manager']?>"></td>
+                </tr>
+					
+				<tr>
+					<td><label>Total Number of Games Played:</label></td>
+                    <td><input type="text" name="played" placeholder="Total Games Played" value="<?php echo $row['played']?>" /></td>
+                </tr>
+				<tr>
+					<td><label>Games won:</label></td>
+                    <td><input type="text" name="won" placeholder="Games won" value="<?php echo $row['won']?>"></td>
+				</tr>
+				<tr>
+					<td><label>Games drawn:</label></td>
+                    <td><input type="text" name="drawn" placeholder="Games drawn" value="<?php echo $row['drawn']?>"></td>
+				</tr>
+				<tr>
+					<td><label>Games lost:</label></td>
+                    <td><input type="text" name="lost" placeholder="Games lost" value="<?php echo $row['lost']?>"></td>
+                </tr>
+					
+				<tr>
+					<td><label>Games for:</label></td>
+                    <td><input type="text" name="for" placeholder="Games for" value="<?php echo $row['for']?>" /></td>
+                </tr>
+                <tr>
+					<td><label>Games against:</label></td>
+                    <td><input type="text" name="against" placeholder="Games against" value="<?php echo $row['against']?>"></td>
+				</tr>
+				<tr>
+					<td><label>Goal difference:</label></td>
+                    <td><input type="text" name="gd" placeholder="Goal difference" value="<?php echo $row['gd']?>"></td>
+				</tr>
+				<tr>
+					<td><label>Points:</label></td>
+                    <td><span id="points"><?php echo $row['points']; ?></span></td>
+                    
+                </tr>	
+				<tr><td></td><td><input type="submit" name="update" value="update" /></td></tr>
+			</table>
+		</form>
+	</article>
+</main>
+<!-- adding footer	 -->
 <?php
-		require 'footer.php';
-	?>
+	require 'footer.php';
+?>
