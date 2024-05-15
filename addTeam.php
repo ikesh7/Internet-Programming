@@ -2,24 +2,55 @@
 // <!-- adding header	 -->
 require 'header.php';
 //connecting the database.
-require 'connect.php';
-if (isset($_POST['submit']))
-{
-// code to insert the data in the table.
-$stmt = $pdo->prepare('INSERT INTO teams(name,city,manager,totalPlayers)
-VALUES(:name,:city,:manager,:totalPlayers)');
-$criteria =
-[
-'name'=>$_POST['name'],
-'city'=>$_POST['city'],
-'manager'=>$_POST['manager'],
-'totalPlayers'=>$_POST['total']
+$pdo = new PDO('mysql:host=localhost;dbname=assignment','root','');
+?>
 
-];
-$result = $stmt->execute($criteria);
-if($result) echo 'Added successfully.';
-else echo '! Not Added. Try again.';
+<?php
+  
+  if (isset($_POST['submit'])) {
+    // Validate and sanitize input
+    $played = filter_var($_POST['played'], FILTER_VALIDATE_INT);
+    $won = filter_var($_POST['won'], FILTER_VALIDATE_INT);
+    $drawn = filter_var($_POST['drawn'], FILTER_VALIDATE_INT);
+    $lost = filter_var($_POST['lost'], FILTER_VALIDATE_INT);
+    $for = filter_var($_POST['for'], FILTER_VALIDATE_INT);
+    $gd = filter_var($_POST['gd'], FILTER_SANITIZE_STRING);
+    
+    if ($played === false || $won === false || $drawn === false || $lost === false || $for === false) {
+        echo "Invalid input data.";
+        exit;
+    }
+    
+    // Calculate points using a standard scoring system
+    $points = ($won * 3) + ($drawn * 1);
 
+    // Prepare and execute the SQL query
+    $stmt = $pdo->prepare('INSERT INTO teams(name, city, manager, played, won, drawn, lost, `for`, against, gd, points)
+                           VALUES(:name, :city, :manager, :played, :won, :drawn, :lost, :for, :against, :gd, :points)');
+    $criteria = [
+        'name' => $_POST['title'],
+        'city' => $_POST['city'],
+        'manager' => $_POST['manager'],
+        'played' => $played,
+        'won' => $won,
+        'drawn' => $drawn,
+        'lost' => $lost,
+        'for' => $for,
+        'against' => $_POST['against'],
+        'gd' => $_POST['gd'],
+        'points' => $points
+    ];
+
+    try {
+        $result = $stmt->execute($criteria);
+        if ($result) {
+            echo 'Added successfully.';
+        } else {
+            echo '! Not Added. Try again.';
+        }
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 }
 ?>
 <main>
@@ -48,7 +79,7 @@ else echo '! Not Added. Try again.';
     <form action="" method="post">
         <div class="form-group">
             <label for="club_name">Club Name:</label>
-            <input type="text" id="club_name" name="name" required>
+            <input type="text" id="club_name" name="title" required>
         </div>
         <div class="form-group">
             <label for="club_city">Club City:</label>
@@ -59,13 +90,38 @@ else echo '! Not Added. Try again.';
             <input type="text" id="club_manager" name="manager" required>
         </div>
         <div class="form-group">
-            <label for="total_players">Total Number of Players:</label>
-            <input type="number" id="total_players" name="total" min="0" required>
+            <label for="total_played">Total Number of Games Played:</label>
+            <input type="number" id="total_played" name="played" min="0" required>
         </div>
-        <button type="submit" class="btn-submit">Submit</button>
+        <div class="form-group">
+            <label for="won">Games won:</label>
+            <input type="number" id="won" name="won" min="0" required>
+        </div>
+        <div class="form-group">
+            <label for="drawn">Games drawn:</label>
+            <input type="number" id="drawn" name="drawn" min="0" required>
+        </div>
+        <div class="form-group">
+            <label for="lost">Games lost:</label>
+            <input type="number" id="lost" name="lost" min="0" required>
+        </div>
+        <div class="form-group">
+            <label for="for">Games for:</label>
+            <input type="number" id="for" name="for" min="0" required>
+        </div>
+        <div class="form-group">
+            <label for="against">Games against:</label>
+            <input type="number" id="against" name="against" min="0" required>
+        </div>
+        <div class="form-group">
+            <label for="gd">Goal difference:</label>
+            <input type="text" id="gd" name="gd" required>
+        </div>
+        <button type="submit" class="btn-submit" name="submit">Submit</button>
     </form>
 </div>
+
 </main>
 	<?php
-		require 'footer.php';
+//		require 'footer.php';
 	?>
