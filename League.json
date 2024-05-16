@@ -1,9 +1,52 @@
-
-        {
-            "name": "Arsenal",
-            "played": 28,
-            "points": 64
-        }
-        
-
-    
+{
+  "seasons": [
+    {
+      "displayText": "2023/24",
+      "value": "5mOOmpzT19e2EEn4bUY5ti",
+      "selectedValue": true
+    }
+  ],
+  "competitions": [
+    {
+      "displayText": "Premier League",
+      "value": "4ovcp9JVyWP9eQ2XXaWywV",
+      "selectedValue": true
+    }
+  ],
+  "items": [
+    {
+      "competitionDetails": {
+        "optaId": 8,
+        "title": "Premier League"
+      },
+      "standings": {
+        "id": "a9ee2d46-1ff4-41c7-8320-7681789da1e3",
+        "tables": [
+          {
+            "id": "967068c8-8ac9-4a13-806e-fa498585fffd",
+            "rows": [
+              {
+                "points": 88,
+                "position": 1,
+                "played": 37,
+                "won": 27,
+                "drawn": 7,
+                "lost": 3,
+                "goalsFor": 93,
+                "goalsAgainst": 33,
+                "positionChange": "Up",
+                "goalDifference": "+60",
+                "recentForm": ["W", "W", "W", "W", "W"],
+                "crestUrl": "https://clublogos.stadion.io/assets/ClubLogos/Football/English/679.png",
+                "clubId": 43,
+                "clubName": "Manchester City",
+                "clubShortName": "Man City",
+                "featuredTeam": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
