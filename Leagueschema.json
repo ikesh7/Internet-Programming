@@ -2,33 +2,92 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "teams": {
+        "seasons": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "position": { "type": "integer" },
-                    "name": { "type": "string" },
-                    "played": { "type": "integer" },
-                    "goalDifference": { "type": "integer" },
-                    "points": { "type": "integer" }
+                    "displayText": { "type": "string" },
+                    "value": { "type": "string" },
+                    "selectedValue": { "type": "boolean" }
                 },
-                "required": ["position", "name", "played", "goalDifference", "points"]
+                "required": ["displayText", "value", "selectedValue"]
             }
         },
-        "topScorers": {
+        "competitions": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "rank": { "type": "integer" },
-                    "name": { "type": "string" },
-                    "team": { "type": "string" },
-                    "goals": { "type": "integer" }
+                    "displayText": { "type": "string" },
+                    "value": { "type": "string" },
+                    "selectedValue": { "type": "boolean" }
                 },
-                "required": ["rank", "name", "team", "goals"]
+                "required": ["displayText", "value", "selectedValue"]
+            }
+        },
+        "items": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "competitionDetails": {
+                        "type": "object",
+                        "properties": {
+                            "optaId": { "type": "integer" },
+                            "title": { "type": "string" }
+                        },
+                        "required": ["optaId", "title"]
+                    },
+                    "standings": {
+                        "type": "object",
+                        "properties": {
+                            "id": { "type": "string" },
+                            "tables": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": { "type": "string" },
+                                        "rows": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "points": { "type": "integer" },
+                                                    "position": { "type": "integer" },
+                                                    "played": { "type": "integer" },
+                                                    "won": { "type": "integer" },
+                                                    "drawn": { "type": "integer" },
+                                                    "lost": { "type": "integer" },
+                                                    "goalsFor": { "type": "integer" },
+                                                    "goalsAgainst": { "type": "integer" },
+                                                    "positionChange": { "type": "string" },
+                                                    "goalDifference": { "type": "string" },
+                                                    "recentForm": {
+                                                        "type": "array",
+                                                        "items": { "type": "string" }
+                                                    },
+                                                    "crestUrl": { "type": "string" },
+                                                    "clubId": { "type": "integer" },
+                                                    "clubName": { "type": "string" },
+                                                    "clubShortName": { "type": "string" },
+                                                    "featuredTeam": { "type": "boolean" }
+                                                },
+                                                "required": ["points", "position", "played", "won", "drawn", "lost", "goalsFor", "goalsAgainst", "positionChange", "goalDifference", "recentForm", "crestUrl", "clubId", "clubName", "clubShortName", "featuredTeam"]
+                                            }
+                                        }
+                                    },
+                                    "required": ["id", "rows"]
+                                }
+                            }
+                        },
+                        "required": ["id", "tables"]
+                    }
+                },
+                "required": ["competitionDetails", "standings"]
             }
         }
     },
-    "required": ["teams", "topScorers"]
+    "required": ["seasons", "competitions", "items"]
 }
