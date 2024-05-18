@@ -1,93 +1,76 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "LeagueTable",
     "type": "object",
     "properties": {
-        "seasons": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "displayText": { "type": "string" },
-                    "value": { "type": "string" },
-                    "selectedValue": { "type": "boolean" }
-                },
-                "required": ["displayText", "value", "selectedValue"]
-            }
-        },
-        "competitions": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "displayText": { "type": "string" },
-                    "value": { "type": "string" },
-                    "selectedValue": { "type": "boolean" }
-                },
-                "required": ["displayText", "value", "selectedValue"]
-            }
-        },
+      "league": {
+        "type": "string",
+        "description": "The name of the league."
+      },
+      "season": {
+        "type": "string",
+        "description": "The season of the league."
+      },
+      "tables": {
+        "type": "array",
         "items": {
-            "type": "array",
-            "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "rows": {
+              "type": "array",
+              "items": {
                 "type": "object",
                 "properties": {
-                    "competitionDetails": {
-                        "type": "object",
-                        "properties": {
-                            "optaId": { "type": "integer" },
-                            "title": { "type": "string" }
-                        },
-                        "required": ["optaId", "title"]
-                    },
-                    "standings": {
-                        "type": "object",
-                        "properties": {
-                            "id": { "type": "string" },
-                            "tables": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": { "type": "string" },
-                                        "rows": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "points": { "type": "integer" },
-                                                    "position": { "type": "integer" },
-                                                    "played": { "type": "integer" },
-                                                    "won": { "type": "integer" },
-                                                    "drawn": { "type": "integer" },
-                                                    "lost": { "type": "integer" },
-                                                    "goalsFor": { "type": "integer" },
-                                                    "goalsAgainst": { "type": "integer" },
-                                                    "positionChange": { "type": "string" },
-                                                    "goalDifference": { "type": "string" },
-                                                    "recentForm": {
-                                                        "type": "array",
-                                                        "items": { "type": "string" }
-                                                    },
-                                                    "crestUrl": { "type": "string" },
-                                                    "clubId": { "type": "integer" },
-                                                    "clubName": { "type": "string" },
-                                                    "clubShortName": { "type": "string" },
-                                                    "featuredTeam": { "type": "boolean" }
-                                                },
-                                                "required": ["points", "position", "played", "won", "drawn", "lost", "goalsFor", "goalsAgainst", "positionChange", "goalDifference", "recentForm", "crestUrl", "clubId", "clubName", "clubShortName", "featuredTeam"]
-                                            }
-                                        }
-                                    },
-                                    "required": ["id", "rows"]
-                                }
-                            }
-                        },
-                        "required": ["id", "tables"]
-                    }
+                  "points": { "type": "integer" },
+                  "position": { "type": "integer" },
+                  "played": { "type": "integer" },
+                  "won": { "type": "integer" },
+                  "drawn": { "type": "integer" },
+                  "lost": { "type": "integer" },
+                  "goalsFor": { "type": "integer" },
+                  "goalsAgainst": { "type": "integer" },
+                  "positionChange": { "type": "string" },
+                  "goalDifference": { "type": "string" },
+                  "recentForm": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  },
+                  "crestUrl": { "type": "string", "format": "uri" },
+                  "clubId": { "type": "integer" },
+                  "clubName": { "type": "string" },
+                  "clubShortName": { "type": "string" },
+                  "featuredTeam": { "type": "boolean" }
                 },
-                "required": ["competitionDetails", "standings"]
+                "required": [
+                  "points",
+                  "position",
+                  "played",
+                  "won",
+                  "drawn",
+                  "lost",
+                  "goalsFor",
+                  "goalsAgainst",
+                  "positionChange",
+                  "goalDifference",
+                  "recentForm",
+                  "crestUrl",
+                  "clubId",
+                  "clubName",
+                  "clubShortName",
+                  "featuredTeam"
+                ]
+              }
             }
+          },
+          "required": ["id", "rows"]
         }
+      }
     },
-    "required": ["seasons", "competitions", "items"]
-}
+    "required": ["league", "season", "tables"]
+  }
+  
+  
+  
