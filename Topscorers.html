@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premier League Top Scorers</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Goal Scorers</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Premier League Top Scorers</h1>
-        <div id="top-scorers-container">
-        </div>
-    </div>
-    <script src="League.js"></script>
+
+<h2>Top Goal Scorers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Player</th>
+      <th>Nationality</th>
+      <th>Team</th>
+      <th>Goals</th>
+      <th>Assists</th>
+    </tr>
+  </thead>
+  <tbody id="goalScorersTableBody">
+    <!-- Table rows will be added dynamically using JavaScript -->
+  </tbody>
+</table>
+
+<script src="goal.js"></script>
+
 </body>
 </html>
