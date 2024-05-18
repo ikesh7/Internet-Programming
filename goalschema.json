@@ -1,0 +1,32 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Football Player Goal Data",
+    "type": "object",
+    "properties": {
+      "topScorers": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "matchDay": { "type": "integer" },
+            "date": { "type": "string", "format": "date" },
+            "venue": { "type": "string", "enum": ["H", "A"] },
+            "team": { "type": "string" },
+            "opponent": { "type": "string" },
+            "opponentRank": { "type": "integer" },
+            "score": { "type": "string" },
+            "position": { "type": "string" },
+            "goals": { "type": "integer" },
+            "minutesPlayed": { "type": "integer" },
+            "goalDetails": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["matchDay", "date", "venue", "team", "opponent", "opponentRank", "score", "position", "goals", "minutesPlayed", "goalDetails"]
+        }
+      }
+    },
+    "required": ["topScorers"]
+  }
+  
