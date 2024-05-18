@@ -5,29 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premier League Table</title>
     <link rel="stylesheet" href="style.css">
+    <a href="./Web Interface/adminLogin.php">Admin Login</a>
+    <link rel="stylesheet" href="Topscorer.html">
 </head>
 <body>
     <div class="container">
         <h1>Premier League Table</h1>
+        
         <div id="league-table">
             <table>
-                <tr>
-                    <th>Position</th>
-                    <th>Team</th>
-                    <th>Game Played</th>
-                    <th>Game Won</th>
-                    <th>Game Lost</th>
-                    <th>Game Draw</th>
-                    <th>Goal For</th>
-                    <th>Goal Against</th>
-                    <th>Goal Difference</th>
-                    <th>Game Points</th>
-                    <th>Wins (Last 6)</th>
-                    <th>Losses (Last 6)</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Team</th>
+                        <th>Game Played</th>
+                        <th>Game Won</th>
+                        <th>Game Lost</th>
+                        <th>Game Draw</th>
+                        <th>Goal For</th>
+                        <th>Goal Against</th>
+                        <th>Goal Difference</th>
+                        <th>Game Points</th>
+                        <th>Wins (Last 5)</th>
+                    </tr>
+                </thead>
+                <tbody id="leagueTableBody">
+                    <!-- Table rows will be added dynamically using JavaScript -->
+                </tbody>
             </table>
         </div>
     </div>
-    <script src="League.js"></script>
+    <script src="league.js"></script>
 </body>
 </html>
