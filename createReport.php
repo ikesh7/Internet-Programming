@@ -1,15 +1,21 @@
 <?php
 require 'connect.php';
+session_start();
+		if (!isset($_SESSION['sessionId'])) {
+			header('location:adminlogin.php');
+			
+		}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if at least two checkboxes are selected
-    if (isset($_POST['team_id']) && count($_POST['team_id']) >= 2) {
+    if (isset($_POST['clubId']) && count($_POST['clubId']) >= 2) {
        
 
             // Get selected team IDs
-            $selectedTeamIds = implode(",", $_POST['team_id']);
+            $selectedTeamIds = implode(",", $_POST['clubId']);
 
             // SQL query to select data for selected teams
-            $sql = "SELECT * FROM teams WHERE teamId IN ($selectedTeamIds)";
+            $sql = "SELECT * FROM team WHERE clubId IN ($selectedTeamIds)";
             $stmt = $pdo->query($sql);
 
             // Check if there are any selected teams
@@ -19,18 +25,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "<table border='1'>";
                 
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<h3>Team ID: " . $row['teamId'] . "</h3>";
-                    echo "<p><strong>Team Name:</strong> " . $row['name'] . "</p>";
-                    echo "<p><strong>City:</strong> " . $row['city'] . "</p>";
-                    echo "<p><strong>Manager:</strong> " . $row['manager'] . "</p>";
+                    echo "<h3>Team ID: " . $row['clubId'] . "</h3>";
+                    echo "<p><strong>Team Name:</strong> " . $row['clubName'] . "</p>";
+                    echo "<p><strong>Team's short name:</strong> " . $row['clubShortName'] . "</p>";
+                    echo "<p><strong>Points:</strong> " . $row['points'] . "</p>";
+                    echo "<p><strong>Position:</strong> " . $row['position'] . "</p>";
                     echo "<p><strong>Total Number of Games Played:</strong> " . $row['played'] . "</p>";
                     echo "<p><strong>Games won:</strong> " . $row['won'] . "</p>";
                     echo "<p><strong>Games drawn:</strong> " . $row['drawn'] . "</p>";
                     echo "<p><strong>Games lost:</strong> " . $row['lost'] . "</p>";
-                    echo "<p><strong>Games for:</strong> " . $row['for'] . "</p>";
-                    echo "<p><strong>Games against:</strong> " . $row['against'] . "</p>";
-                    echo "<p><strong>Goal difference:</strong> " . $row['gd'] . "</p>";
-                    echo "<p><strong>Points:</strong> " . $row['points'] . "</p>";
+                    echo "<p><strong>Goals for:</strong> " . $row['goalsFor'] . "</p>";
+                    echo "<p><strong>Goals against:</strong> " . $row['goalsAgainst'] . "</p>";
+                    echo "<p><strong>Goal difference:</strong> " . $row['goalDifference'] . "</p>";
+                    echo "<p><strong>Position changed:</strong> " . $row['positionChange'] . "</p>";
+                    echo "<p><strong>Recent Form:</strong> " . $row['recentForm'] . "</p>";
+                    echo "<p><strong>Crest Url:</strong> " . $row['crestUrl'] . "</p>";
+                    echo "<p><strong>Featured Team:</strong> " . $row['featuredTeam'] . "</p>";
+
                     echo "<hr>";
                 }
                 echo "</table>";
