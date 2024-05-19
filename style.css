@@ -1,27 +1,44 @@
-body {
-    font-family: Arial, sans-serif;
+/* Style the navigation bar */
+.navbar {
+    background-color: #333; /* Background color */
+    overflow: hidden; /* Ensure all links are visible */
   }
   
-  #table-container {
-    margin: 20px;
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left; /* Float the links to the left */
+    display: block; /* Make the links block elements */
+    color: white; /* Text color */
+    text-align: center; /* Center-align text */
+    padding: 14px 20px; /* Padding (top and bottom) 14px, Padding (left and right) 20px */
+    text-decoration: none; /* Remove underline from links */
   }
   
-  .table {
-    border-collapse: collapse;
-    width: 100%;
+  /* Change color of links on hover */
+  .navbar a:hover {
+    background-color: #ddd; /* Background color */
+    color: black; /* Text color */
   }
   
-  .table th, .table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+  /* Add active class to the current link */
+  .active {
+    background-color: #4CAF50; /* Background color */
+    color: white; /* Text color */
   }
   
-  .table th {
-    background-color: #f2f2f2;
+table {
+    font-family: Arial, sans-serif; /* Setting font family for the table */
+    border-collapse: collapse; /*collapse table border into a single border*/
+    width: 100%;  /* setting the width */ 
   }
- #container.result-icon {
-    width: 3%;
-    height: 3%;
-    margin-right: 3px; /* Add margin to separate the icons */
-}  
+  /*table header and table cell */
+  th, td {
+    border: 1px solid #dddddd;   /* Setting a border for cells and header*/
+    text-align: left; /*Aligning text to the left */
+    padding: 8px;  /*Adding padding to table header and cells */
+  }
+  th {
+    background-color: #f2f2f2;  /*Setting background color for table head */
+  }
+  
+  
