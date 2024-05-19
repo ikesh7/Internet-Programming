@@ -1,145 +1,146 @@
+/* Applying grid layout to the body element */
 body {
-    display: grid;
-    grid-template-columns: 15% 85%;
-    grid-template-rows: auto;
-    grid-template-areas: "header header"
-                            "nav main"
-                            "footer footer";
+    display: grid; 
+    grid-template-columns: 15% 85%; /* Defining column sizes */
+    grid-template-rows: auto 1fr auto; /* Defining row sizes */
+    grid-template-areas: 
+        "header header" /* Header spans both columns */
+        "nav main"      /* Nav in the first column, main in the second */
+        "footer footer"; /* Footer spans both columns */
+    font-family: Arial, Helvetica, sans-serif; /* Setting font family */
+    margin: 0; /* Removing default margin */
+    padding: 0; /* Removing default padding */
 }
 
+/* Styling the header */
 header {
-    background-color: #555;
-    color: white;
-    padding: 10px;
-    grid-area: header;
+    background-color: #555; /* Setting background color */
+    color: white; /* Setting white text color */
+    padding: 10px; /* Setting padding inside the header */
+    text-align: center; /* aligning the text in the center */
+    grid-area: header; /* Placing the header in the header grid area */
 }
 
+/* Styling the navigation */
 nav {
-    background-color: whitesmoke;
-    color: black;
-    grid-area: nav;
+    background-color: whitesmoke; /* Setting background color */
+    padding: 10px; /* Setting Padding inside the nav */
+    grid-area: nav; /* Placing the nav in the nav grid area */
 }
 
 nav > ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    border-right: 2%;
-    border-color: whitesmoke;
-    border-style: solid;
-    /*width: 10%;*/
-    background-color: whitesmoke;
-  }
-  
-nav > ul li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+    list-style-type: none; /* Removing default list bullets */
+    margin: 0; /* Removing default margin */
+    padding: 0; /* Removing default padding */
 }
-  
-/* Change the link color on hover */
+
+nav > ul li {
+    margin-bottom: 10px; /* Setting space between list items */
+}
+
+nav > ul li a {
+    display: block; /* Making links block elements */
+    color: #000; /* Setting black text color */
+    padding: 8px 16px; /*Setting padding inside the links */
+    text-decoration: none; /* Removing underline from links */
+}
+
 nav > ul li a:hover {
-    background-color: #555;
-    color: whitesmoke;
+    background-color: #555; /* Setting background color on hover */
+    color: whitesmoke; /* Setting color on hover */
 }
 
 main {
-    background-color: whitesmoke;
-    color: black;
-    margin-left: 1em;
-    padding-left: 1em;
-    grid-area: main;
+    background-color: whitesmoke; /* Setting background color */
+    padding: 20px; /* Setting padding inside the main content area */
+    grid-area: main; /* Placing the main content in the main grid area */
 }
 
 footer {
-    padding-top: 2em;
-    background-color: #555;
-    color: white;
-    grid-area: footer;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-.note {
-    color: red;
-    font-size: 12pt;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 1em;
-}
-
-.blueNote {
-    color: blue;
-    font-size: 12pt;
-    font-family: Arial, Helvetica, sans-serif;
-    padding-top: 1em;
-    font-weight: bold;
-}
-
-.sketch img {
-    width: 60%;
-    height: auto;
-}
-
-.addmore > input {
-    display:block;
-    float: left;
-    margin: 0 2em 2em 2em;
-    padding: 0.5em 5em;
-    text-decoration: none;
-    background-color: whitesmoke;
-    color:#555;
-}
-
-/* Change the link color on hover */
-.addmore > input:hover {
-    display:block;
-    float: left;
-    margin: 0 2em 2em 2em;
-    padding: 0.5em 5em;
-    text-decoration: none;
-    background-color: #555;
-    color: whitesmoke;
+    background-color: #555; /* Setting background color */
+    color: white; /* Setting white text color */
+    text-align: center; /* aligning the text in the center */
+    padding: 10px; /* Setting padding inside the footer */
+    grid-area: footer; /* Placing the footer in the footer grid area */
 }
 
 .container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    max-width: 700px; /* Setting maximum width of the container */
+    margin: 0 auto; /* Setting the container horizontally on center */
+    padding: 20px; /* Setting padding inside the container */
+    border: 1px solid #ccc; /* Setting border color*/
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Setting background color */
 }
+
+.chartbox {
+    width: 100%; /* Setting Full width of the container */
+}
+
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Setting space between form groups */
 }
+
 .form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+    display: block; /* Displaying labels as block elements */
+    font-weight: bold; /* Making label text bold */
+    margin-bottom: 5px; /* Setting space between the label and input */
 }
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+
+.form-group input,
+.form-group select { /* Applying the same styles to input and select elements */
+    width: 100%; /* Setting full width of the container */
+    padding: 8px; /* Setting padding inside the input/select field */
+    border: 1px solid #ccc; /* Setting border color*/
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
-.form-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+
 .btn-submit {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    background-color: #4CAF50; /* Setting background color */
+    color: white; /* Setting white text color */
+    padding: 10px 20px; /* Setting padding inside the button */
+    border: none; /* Removing default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Setting pointer cursor on hover */
 }
+
+/* Changing the background color of the submit button on hover */
 .btn-submit:hover {
-    background-color: #45a049;
+    background-color: #45a049; 
+}
+
+.note {
+    color: red; /* Setting red text color */
+    font-size: 12pt; /* Setting font size */
+    padding-top: 1em; /* Setting space above the note */
+}
+
+.blueNote {
+    color: blue; /*Setting blue text color */
+    font-size: 12pt; /* Setting font size */
+    font-weight: bold; /* Setting bold text */
+    padding-top: 1em; /* Setting space above the note */
+}
+
+.sketch img {
+    width: 60%; /* Setting image width as a percentage of the container */
+    height: auto; /* Maintaining aspect ratio */
+}
+
+.addmore > input {
+    display: block; /* Displaying input fields as block elements */
+    margin: 0 2em 2em 2em; /* Setting margin around the input fields */
+    padding: 0.5em 5em; /* Setting padding inside the input fields */
+    background-color: whitesmoke; /* Setting background color */
+    color: #555; /* Setting text color */
+    border: none; /* Removing default border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Setting pointer cursor on hover */
+}
+
+/* Change the background color of input fields in the addmore class on hover */
+.addmore > input:hover {
+    background-color: #555; /* Setting background color */
+    color: whitesmoke; /* Setting text color */
 }
