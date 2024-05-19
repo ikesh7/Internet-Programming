@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premier League Table</title>
-    <link rel="stylesheet" href="style.css">
-    <a href="./Web Interface/adminLogin.php">Admin Login</a>
-    <link rel="stylesheet" href="Topscorer.html">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Premier League Table</h1>
         
-        <div id="league-table">
-            <table>
+        <!-- Link to backend php files and to Topscorer.html-->
+        <div class="navbar">
+            <a href="./Web Interface/adminLogin.php">Admin Login</a>
+            <a class="active" href="League.html">League</a>
+            <a href="Topscorer.html">Top Scorer</a>
+          </div>
+          <h1>Premier League Table</h1>
+        <div id="table-container">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Position</th>
@@ -26,7 +30,7 @@
                         <th>Goal Against</th>
                         <th>Goal Difference</th>
                         <th>Game Points</th>
-                        <th>Wins (Last 5)</th>
+                        <th>Wins (Last 6)</th>
                     </tr>
                 </thead>
                 <tbody id="leagueTableBody">
@@ -35,6 +39,7 @@
             </table>
         </div>
     </div>
+    <!-- Link to java script league.js-->
     <script src="league.js"></script>
 </body>
 </html>
